@@ -5,7 +5,7 @@
 | Item | Details |
 | :--- | :--- |
 | **Course Name** | C# Programming I |
-| **Student Name** | Mohamed Ali Osman Osman |
+| **Student Name** | Mohamed Ali Osman |
 | **Student ID** | C1240545 |
-| **Department** | Computer Science |
+| **Department** | Computer Application |
 | **Instructor** | Yahye Ali Isse |
