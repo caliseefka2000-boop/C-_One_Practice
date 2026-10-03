@@ -1,0 +1,67 @@
+using System;
+using System.Windows.Forms;
+
+namespace Home_Assignment5
+{
+    public partial class PayrollForm : Form
+    {
+        public PayrollForm()
+        {
+            InitializeComponent();
+        }
+
+        private void calculateButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal hoursWorked;
+                decimal hourlyPayRate;
+                decimal grossPay;
+
+                while (!decimal.TryParse(hoursWorkedTextBox.Text, out hoursWorked) || hoursWorked < 0)
+                {
+                    MessageBox.Show("Please enter a valid non-negative number for hours worked.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    hoursWorkedTextBox.Focus();
+                    return;
+                }
+
+                while (!decimal.TryParse(hourlyPayRateTextBox.Text, out hourlyPayRate) || hourlyPayRate < 0)
+                {
+                    MessageBox.Show("Please enter a valid non-negative number for hourly pay rate.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    hourlyPayRateTextBox.Focus();
+                    return;
+                }
+
+                if (hoursWorked > 40)
+                {
+                    decimal regularHours = 40;
+                    decimal overtimeHours = hoursWorked - 40;
+                    grossPay = (regularHours * hourlyPayRate) + (overtimeHours * hourlyPayRate * 1.5m);
+                }
+                else
+                {
+                    grossPay = hoursWorked * hourlyPayRate;
+                }
+
+                grossPayLabel.Text = grossPay.ToString("c");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            hoursWorkedTextBox.Text = "";
+            hourlyPayRateTextBox.Text = "";
+            grossPayLabel.Text = "";
+            hoursWorkedTextBox.Focus();
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}
